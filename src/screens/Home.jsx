@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Calendar from '../container/Calendar';
 import {getStocks} from "../actions";
 import {DataService} from "../DataService";
+import Graph from "../container/Graph";
 
 interface IState {
 
@@ -20,8 +21,11 @@ class Home extends Component<any,IState> {
 
     render = () => {
         return (
-            <ScrollView>
+            <ScrollView >
                 <Calendar navigation={this.props.navigation}/>
+                <View style={{alignItems:'center',justifyContent:'center',marginTop:20}}>
+                    {/*<Graph/>*/}
+                </View>
             </ScrollView>
         )
     };
