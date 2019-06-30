@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
 import Navigator from './src/navigation';
+import { stockReducer } from "./src/reducer";
+import rootSaga from "./src/sagas";
 
 
 // const reducers = combineReducers({
 //   login: LoginReducer
 // });
 
-const store = createStore();
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(stockReducer);
 
 export default class App extends Component {
   render() {

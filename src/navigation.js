@@ -1,6 +1,7 @@
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
 import Home from './screens/Home';
 import StockForm from './screens/StockForm';
+import Splash from './screens/Splash';
 
 const AppNavigator = createStackNavigator({
     Home: {
@@ -14,6 +15,14 @@ const AppNavigator = createStackNavigator({
         initialRouteName: 'Home',
     })
 
-const Navigator = createAppContainer(AppNavigator);
+const splash = createSwitchNavigator({
+    Splash: Splash,
+    App: AppNavigator,
+},
+    {
+        initialRouteName: 'Splash'
+    })
+
+const Navigator = createAppContainer(splash);
 
 export default Navigator;

@@ -1,27 +1,36 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native'
-
-interface IProps {
-
-}
+import { ScrollView, Text, View, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+import Calendar from '../container/Calendar';
+import {getStocks} from "../actions";
+import {DataService} from "../DataService";
 
 interface IState {
 
 }
 
-export default class Home extends Component<IProps,IState> {
-    constructor (props: IProps) {
+class Home extends Component<any,IState> {
+    constructor (props) {
         super(props);
         this.state = {
 
         };
     }
 
+
     render = () => {
         return (
-            <View>
-                <Text>HomeScreen</Text>
-            </View>
+            <ScrollView>
+                <Calendar navigation={this.props.navigation}/>
+            </ScrollView>
         )
     };
 }
+
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        getStocks: (data) => {dispatch(getStocks(data))},
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Home);
