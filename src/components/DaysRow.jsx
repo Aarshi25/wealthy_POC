@@ -31,7 +31,6 @@ class DaysRow extends Component<IProps,IState> {
     }
 
     componentDidMount(): void {
-        console.log(this.props.stocks,"$$$$$$4")
         // let date = new Date().getDate();
         // let month = new Date().getMonth();
         // let today = `${date}/${month}`;
@@ -61,7 +60,6 @@ class DaysRow extends Component<IProps,IState> {
             }
             this.setState({days: dayArray, stock3: stockArray});
         }
-        console.log(this.state,"******8");
     }
 
     render () {
@@ -76,16 +74,13 @@ class DaysRow extends Component<IProps,IState> {
         days = this.state.days;
         return days.map((day) => {
             if(this.props.stocks) {
-                    return (<DayButton handleClick={this.handleClick} day={day} prices={this.props.stocks[day-1]}/>);
+                    return (<DayButton navigation={this.props.navigation} day={day} prices={this.props.stocks[day-1]}/>);
             } else {
-                return (<DayButton handleClick={this.handleClick} day={day}/>);
+                return (<DayButton navigation={this.props.navigation} day={day}/>);
             }
         })
     }
 
-    handleClick = () => {
-        this.props.navigation.navigate('StockForm');
-    }
 }
 
 const mapDispatchToProps = (dispatch) => {

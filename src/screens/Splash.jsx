@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, Text, View, StyleSheet, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import Calendar from '../container/Calendar';
-import {getStocks} from "../actions";
+import {getStocks,setDate} from "../actions";
 import {DataService} from "../DataService";
 
 interface IState {
@@ -20,7 +20,10 @@ class Splash extends Component<any,IState> {
     componentDidMount = async () => {
         await DataService.getData()
             .then((res)=>{
-                this.props.getStocks(res)});
+                this.props.getStocks(res);
+                this.props.setDate();
+            });
+
         setTimeout(()=>{
             this.props.navigation.navigate('App');
         },4000);
@@ -39,6 +42,7 @@ class Splash extends Component<any,IState> {
 const mapDispatchToProps = (dispatch: any) => {
     return {
         getStocks: (data) => {dispatch(getStocks(data))},
+        setDate: () => {dispatch(setDate())}
     }
 }
 

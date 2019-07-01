@@ -23,7 +23,6 @@ class Calendar extends Component<IProps,any> {
     render = () => {
         if(this.props.loading){
             const stocks = this.props.stocks;
-            console.log(stocks,"***");
             return (
                 <View style={styles.container}>
                     <View style={styles.monthContainer}>

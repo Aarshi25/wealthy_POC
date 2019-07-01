@@ -1,13 +1,10 @@
-import { put, takeLatest, all } from 'redux-saga/effects';
+import { put, takeLatest, all, call } from 'redux-saga/effects';
 import {DataService} from "./DataService";
 import { actions } from "./actions";
 
 
 function* getData () {
-    const stocks = DataService.getData()
-        .then((response) => {
-            return response
-        });
+    const stocks = yield call(DataService.getData());
     yield put({type: actions.SET_STOCKS, payload: stocks})
 }
 

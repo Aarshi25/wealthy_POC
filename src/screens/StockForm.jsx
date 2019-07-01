@@ -1,20 +1,30 @@
 import React, { Component } from 'react';
-import { View, TextInput, StyleSheet, Text } from 'react-native';
+import { View, TextInput, StyleSheet, Text , TouchableOpacity } from 'react-native';
+import {connect} from 'react-redux';
 
 interface IProps {
-    date: string;
+    date: number;
+    navigation: any;
 }
 
 interface IState {
     stock: string
 }
 
-export default class StockForm extends Component<IProps,IState> {
+class StockForm extends Component<IProps,IState> {
     constructor (props: IProps) {
         super(props);
         this.state = {
             stock:'',
         };
+    }
+    componentDidMount(): void {
+        const {currentDate} = this.props;
+        const clickedDay = this.props.navigation.getParam('date');
+        const currentDay = currentDate.split('/');
+        if(clickedDay==currentDay[0]){
+            this.setState({stock: this.props.navigation.getParam('stock')});
+        }
     }
 
     render = () => {
@@ -25,7 +35,11 @@ export default class StockForm extends Component<IProps,IState> {
                 value={this.state.stock}
                 onChangeText={this.handleChange}
                 style={styles.textBox}
+                keyboardType = 'phone-pad'
                 />
+                <TouchableOpacity style={styles.button}>
+                    <Text style={{color:'white'}}>Submit</Text>
+                </TouchableOpacity>
             </View>
         )
     };
@@ -46,6 +60,23 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 10,
         width: '80%',
+    },
+    button: {
+        width: '60%',
+        height: 40,
+        marginTop: 40,
+        backgroundColor: 'grey',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 20
     }
 })
+
+const mapStateToProps = (state) => {
+    return {
+        currentDate: state.currentDate,
+    }
+}
+
+export default connect (mapStateToProps)(StockForm);
 

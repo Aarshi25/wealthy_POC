@@ -4,19 +4,22 @@ import { TouchableOpacity, StyleSheet, Text, View} from 'react-native';
 interface IProps {
     day: number,
     prices?: number,
-    handleClick: () => void
+    navigation: any,
 }
 
 const DayButton = (props: IProps) => {
+    const handleClick = () => {
+        props.navigation.navigate('StockForm',{date:props.day,stock: props.prices});
+    }
     return(
         <View>
 
-            <TouchableOpacity onPress={props.handleClick}>
+            <TouchableOpacity onPress={handleClick}>
                 <View style={styles.day}>
                     <Text>{props.day}</Text>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={props.handleClick}>
+            <TouchableOpacity onPress={handleClick}>
                 <Text style={{margin: 5}}>{props.prices ? `${props.prices} $` : 'Add'}</Text>
             </TouchableOpacity>
         </View>
