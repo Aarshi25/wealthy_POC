@@ -9,7 +9,7 @@
     "log": "react-native log-android"
   },
   "dependencies": {
-    "airtable": "^0.6.0",
+    "airtable": "^0.7.2",
     "axios": "^0.19.0",
     "d3": "^5.9.7",
     "moment": "^2.24.0",
